@@ -67,9 +67,9 @@ multiply(4, 3, function(answer){
 function contains(array, name, callback) {
   for (var i = 0; i < array.length; i++) {
     if (array[i] === name) {
-      callback(true);
+      return callback(true);
     } else {
-      return false;
+      callback(false);
     }
   }
 }  //Code Here
@@ -90,13 +90,13 @@ contains(names, 'Colt', function(result){
 function uniq(array, callback) {
   for (var i = 0; i < array.length; i++) {
     for (var j = 0; j < array.length; j++) {
-      if (array[i] === array[j]) {
-        array = array.slice(j, 1);
+      if (array[j] === array[i] && i !== j) {
+        array.splice(i, 1);
       }
     }
   }
   return callback(array);
-}    //Code Here
+}      //Code Here
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
@@ -108,7 +108,7 @@ uniq(names, function(uniqArr){
 
 function each(array, callback) {
   for (var i = 0; i < array.length; i++) {
-    return callback(array[i], i);
+    callback(array[i], i);
   }
 }    //Code Here
 
@@ -123,7 +123,7 @@ each(names, function(item, indice){
 
 function getUserById(array, value, callback) {
   for (value in array) {
-    return callback(array.value);
+    callback(array[value]);
   }
 } //Code Here
 
